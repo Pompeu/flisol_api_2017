@@ -8,12 +8,14 @@
     "debug": "DEBUG=palestra-tdd-flisol:* npm run dev"
   },
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "bluebird": "^3.5.0",
     "body-parser": "~1.17.1",
     "chai": "^3.5.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "express": "^4.15.2",
+    "jsonwebtoken": "^7.3.0",
     "mocha": "^3.2.0",
     "morgan": "~1.8.1",
     "pg": "^6.1.5",

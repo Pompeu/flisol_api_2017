@@ -1,10 +1,11 @@
-'use strict';
+'use strict'
 
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
+const {create, login}= require('../controllers/users_controller')
 
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router
+  .post('/', create)
+  .post('/login', login)
 
-module.exports = router;
+module.exports = router
