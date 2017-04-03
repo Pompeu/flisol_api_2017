@@ -52,5 +52,4 @@ User.login = credentias =>
     })
 
 
-
 module.exports = User

@@ -1,11 +1,12 @@
 {
   "name": "palestra-tdd-flisol",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "debug": "DEBUG=palestra-tdd-flisol:* npm run dev"
+    "debug": "DEBUG=palestra-tdd-flisol:* npm run dev",
+    "test": "NODE_ENV=test; ./node_modules/.bin/mocha ./test/**/*.test.js"
   },
   "dependencies": {
     "bcrypt": "^1.0.2",
