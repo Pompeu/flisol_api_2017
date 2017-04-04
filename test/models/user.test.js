@@ -20,7 +20,6 @@ describe('Model User', () => {
     })
 
     it('should be use has name, email, password', () => {
-      User.getJWT()
       return User
         .create(user)
         .then(newUser => {
@@ -30,30 +29,18 @@ describe('Model User', () => {
         })
     })
 
-    it('should be exist getJWT method', () => {
-      expect(User.getJWT).to.exist;
+    it('should be exist login method', () => {
+      expect(User.login).to.exist
     })
 
-    it('should be getJWT return a JWT valid by user', () => {
-      const user = {name: 'pompeu', email: 'pompeulimp@gmail.com'};
-      return User.getJWT(user)
+    it('should be login method return a user data witiout password', () => {
+      return User.login(user)
         .then(token => {
-          expect(jwt).to.exist
-          const decoded = jwt.verify(token, 'secret');
+          const decoded = jwt.verify(token, 'secret')
           expect(decoded.data.name).to.equal(user.name)
           expect(decoded.data.email).to.equal(user.email)
-        })
-    })
+          expect(decoded.data.password).not.exist
 
-
-    it('should be exist login method', () => {
-      expect(User.login).to.exist;
-    })
-
-    it('should be exist login method', () => {
-      return User.login(user)
-        .then(newUser => {
-          expect(user.name).to.equal(newUser.name)
         })
     })
 

@@ -54,12 +54,6 @@ describe('User api module', () => {
     })
 
     it('should be not create an user with duplicate email', done => {
-      const user = {
-        name: 'Pompeu',
-        email: 'pompeulimp@gmail2.com',
-        password: '12345',
-      }
-
       request(app)
         .post('/users')
         .send(duplicateUser)

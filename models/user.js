@@ -33,23 +33,33 @@ const options = {
 const User = sequelize.define('user', fields, options)
 
 User.hook('beforeCreate',  beforeCreate)
-User.sync();
+User.sync()
 
-User.getJWT =  user =>
+
+const removePassword = user => {
+  delete user.password
+  return user
+}
+
+const getJWT = user =>
   Promise.resolve(jwt.sign({
     exp: Math.floor(Date.now() / 1000) + (60 * 60),
-    data: user
+    data: removePassword(user)
   }, 'secret'))
 
 
-User.login = credentias =>
-  User.findOne({email:  credentias.email})
-    .then(user => {
-      if (bcrypt.compareSync(credentias.password, user.password)) {
+const comparePassworld = (credentias, user ) => {
+  return bcrypt.compare(credentias.password, user.password)
+    .then(isValdid => {
+      if (isValdid) {
         return user.toJSON()
       }
-      throw new Error('invalid credentias')
     })
+}
 
+User.login = credentias =>
+  User.findOne({email:  credentias.email})
+    .then(user => comparePassworld(credentias, user))
+    .then(getJWT)
 
 module.exports = User
