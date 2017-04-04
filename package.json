@@ -8,7 +8,8 @@
     "debug": "DEBUG=palestra-tdd-flisol:* npm run dev",
     "test": "NODE_ENV=test; ./node_modules/.bin/mocha ./test/**/*.test.js",
     "cover": "istanbul cover _mocha ./test/**/*.js",
-    "linter": "./node_modules/.bin/eslint ."
+    "linter": "./node_modules/.bin/eslint .",
+    "plato": "./node_modules/.bin/plato -r -d report -e .eslintrc.json ./controllers/*.js ./models/*.js ./routes/*.js ./test/**/*.test.js"
   },
   "dependencies": {
     "bcrypt": "^1.0.2",

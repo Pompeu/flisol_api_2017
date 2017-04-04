@@ -40,7 +40,6 @@ describe('Model User', () => {
           expect(decoded.data.name).to.equal(user.name)
           expect(decoded.data.email).to.equal(user.email)
           expect(decoded.data.password).not.exist
-
         })
     })
 
