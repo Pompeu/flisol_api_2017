@@ -6,6 +6,7 @@ const logger = require('morgan')
 const bodyParser = require('body-parser')
 
 const users = require('./routes/users')
+const posts = require('./routes/posts')
 
 const app = express()
 
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/users', users)
+app.use('/posts', posts)
 
 app.use(function(req, res) {
   const err = new Error('Not Found')
