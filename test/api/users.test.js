@@ -39,6 +39,23 @@ describe('User api module', () => {
         })
     })
 
+    it('should be not create an user without email', done => {
+      let noMailUser = Object.assign({}, user)
+      noMailUser.email = ''
+
+      request(app)
+        .post('/users')
+        .send(noMailUser)
+        .expect('Content-Type', /json/)
+        .expect(403)
+        .end((err, res) => {
+          expect(err).to.not.exist
+          expect(res.body.error).to.equal('Validation isEmail failed')
+          done()
+        })
+
+    })
+
     it('should be create an user with a encripted password', done => {
 
       request(app)
@@ -70,7 +87,7 @@ describe('User api module', () => {
 
 
   describe('Whe User login in api', () => {
-    it('should be exist route /users/login', done => {
+    it('should be login an user in route /users/login', done => {
       request(app)
         .post('/users/login')
         .send({email: user.email, password: user.password})
@@ -83,5 +100,20 @@ describe('User api module', () => {
         })
 
     })
+
+    it('should be not login an user with invalid credentiais', done => {
+      request(app)
+        .post('/users/login')
+        .send({email: 'jose@ab.com', password: '1234'})
+        .expect('Content-Type', /json/)
+        .expect(403)
+        .end((err, res) => {
+          expect(err).to.not.exist
+          expect(res.body.token).to.not.exist
+          done()
+        })
+
+    })
+
   })
 })

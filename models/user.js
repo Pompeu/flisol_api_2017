@@ -48,8 +48,8 @@ const getJWT = user =>
   }, 'secret'))
 
 
-const comparePassworld = (credentias, user ) => {
-  return bcrypt.compare(credentias.password, user.password)
+const comparePassworld = (credentiais, user) => {
+  return bcrypt.compare(credentiais.password, user.password)
     .then(isValdid => {
       if (isValdid) {
         return user.toJSON()
@@ -57,9 +57,17 @@ const comparePassworld = (credentias, user ) => {
     })
 }
 
-User.login = credentias =>
-  User.findOne({email:  credentias.email})
-    .then(user => comparePassworld(credentias, user))
+const isUserValid = user => {
+  if (user) {
+    return user
+  }
+  throw new Error('invalid email')
+}
+
+User.login = credentiais =>
+  User.findOne({email:  credentiais.email})
+    .then(isUserValid)
+    .then(user => comparePassworld(credentiais, user))
     .then(getJWT)
 
 module.exports = User
