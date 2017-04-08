@@ -12,6 +12,7 @@ module.exports = res => {
     let response = {}
     const errors = err.errors || []
     const message = errors.length ? errors[0].message : ''
+
     if (message.includes('unique')) {
       response = madeRespose(406, err.errors[0].message)
     } else if (message.includes('Validation')) {
