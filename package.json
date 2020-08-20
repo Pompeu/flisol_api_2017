@@ -12,7 +12,7 @@
     "plato": "./node_modules/.bin/plato -r -d report -e .eslintrc.json ./controllers/*.js ./models/*.js ./routes/*.js ./test/**/*.test.js"
   },
   "dependencies": {
-    "bcrypt": "^1.0.2",
+    "bcrypt": "^5.0.0",
     "bluebird": "^3.5.0",
     "body-parser": "~1.17.1",
     "chai": "^3.5.0",
